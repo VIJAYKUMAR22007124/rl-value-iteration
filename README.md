@@ -11,25 +11,23 @@ The Value Iteration algorithm solves for the optimal policy and value function i
 
 ## POLICY ITERATION ALGORITHM
 
-Initialize Value Function:
+- Value iteration is a method of computing an optimal MDP policy  and its value.
+- It begins with an initial guess for the value function, and iteratively updates it towards the optimal value function, according to the Bellman optimality equation.
+- The algorithm is guaranteed to converge to the optimal value function, and in the process of doing so, also converges to the optimal policy.
 
-Set the initial value function V to zero for all states. This is done in the value_iteration function with V = np.zeros(len(P), dtype=np.float64).
-Iterative Value Update:
-
-For each state-action pair, calculate the Q-value using the current value function. This involves:
-Iterating through all states s and actions a.
-For each action, iterating through the transition probabilities, next states, rewards, and done flags to compute the Q-value.
-Update the value function V to be the maximum Q-value for each state.
-Continue iterating until the change in value function V is less than a small threshold θ.
-Extract Optimal Policy:
-
-After convergence, derive the optimal policy by selecting the action that maximizes the Q-value for each state.
-Print Results:
-
-Print identifying information, such as the name and registration number.
-Display the optimal policy and state-value function.
-Compute and print the success probability of reaching the goal and the average undiscounted return based on the derived policy.
-
+The algorithm is as follows:
+1. Initialize the value function `V(s)` arbitrarily for all states `s`.
+2. Repeat until convergence:
+    - Initialize aaction-value function `Q(s, a)` arbitrarily for all states `s` and actions `a`.
+    - For all the states s and all the action a of every state:
+        - Update the action-value function `Q(s, a)` using the Bellman equation.
+        - Take the value function `V(s)` to be the maximum of `Q(s, a)` over all actions `a`.
+        - Check if the maximum difference between `Old V` and `new V` is less than `theta`, where theta is a **small positive number** that determines the **accuracy of estimation**.
+3. If the maximum difference between Old V and new V is greater than theta, then
+    - Update the value function `V` with the **maximum action-value** from `Q`.
+    - Go to **step 2**.
+4. The optimal policy can be constructed by taking the **argmax** of the action-value function `Q(s, a)` over all actions `a`.
+5. Return the optimal policy and the optimal value function.
 ## VALUE ITERATION FUNCTION
 ### Name: B VIJAY KUMAR
 ### Register Number: 212222230173
